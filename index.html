@@ -76,7 +76,7 @@ button:hover {
     <textarea id="resultado" readonly></textarea>
     <div id="status" style="color: green;"></div>
     <br>
-    <button onclick="copiarTexto()">Copiar Texto</button>
+    <button onclick="copiarTexto()" id="btn-cp">Copiar Texto</button>
     <script>
         function converter() {
             const texto = document.getElementById("entrada").value;
@@ -97,6 +97,12 @@ button:hover {
             resultado.select();
             document.execCommand("copy");
             document.querySelector("#status").textContent = 'Texto copiado para a área de transferência!';
+            document.querySelector("#btn-cp").textContent = 'Copiado';
+            
+            setTimeout(function(){
+                    document.querySelector("#status").textContent = '';
+                    document.querySelector("#btn-cp").textContent = 'Copiar Texto';
+            },3000)
         }
 
         function conversorEstilo1(texto) {
