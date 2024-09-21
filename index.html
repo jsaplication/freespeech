@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pensamento Livre</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: none; /* Impede redimensionamento */
+}
+
+#resultado {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Botões ocupam 100% da largura */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@media (min-width: 600px) {
+    button {
+        width: auto; /* Botões voltam a ser auto no desktop */
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <h1>Expressão Sem Limites</h1>
+
+    <textarea id="entrada" placeholder="Digite seu texto aqui..."></textarea>
+
+    <div>
+        <label>
+            <input type="radio" name="estilo" value="1" checked>
+            Estilo 1
+        </label>
+        <label>
+            <input type="radio" name="estilo" value="2">
+            Estilo 2
+        </label>
+    </div>
+
+    <button onclick="converter()">Converter</button>
+    
+
+    <h2>Texto Convertido:</h2>
+    <textarea id="resultado" readonly></textarea>
+    <div id="status" style="color: green;"></div>
+    <br>
+    <button onclick="copiarTexto()">Copiar Texto</button>
+    <script>
+        function converter() {
+            const texto = document.getElementById("entrada").value;
+            const estilo = document.querySelector('input[name="estilo"]:checked').value;
+            let textoConvertido = '';
+
+            if (estilo === '1') {
+                textoConvertido = conversorEstilo1(texto);
+            } else {
+                textoConvertido = conversorEstilo2(texto);
+            }
+
+            document.getElementById("resultado").value = textoConvertido;
+        }
+
+        function copiarTexto() {
+            const resultado = document.getElementById("resultado");
+            resultado.select();
+            document.execCommand("copy");
+            document.querySelector("#status").textContent = 'Texto copiado para a área de transferência!';
+        }
+
+        function conversorEstilo1(texto) {
+            const substituicoes = {
+                'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ',
+                'f': 'ғ', 'g': 'ɢ', 'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ',
+                'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ', 'o': 'ᴏ',
+                'p': 'ᴘ', 'q': 'ǫ', 'r': 'ʀ', 's': 's', 't': 'ᴛ',
+                'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 'y': 'ʏ',
+                'z': 'ᴢ'
+            };
+            return texto.split('').map(char => substituicoes[char] || char).join('');
+        }
+
+        function conversorEstilo2(texto) {
+            const substituicoes = {
+                'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒',
+                'f': '𝑓', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿',
+                'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': '𝑜',
+                'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉',
+                'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎',
+                'z': '𝓏'
+            };
+            return texto.split('').map(char => substituicoes[char] || char).join('');
+        }
+    </script>
+
+</body>
+</html>
